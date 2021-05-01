@@ -170,13 +170,13 @@ class Test_Widget extends \Elementor\Widget_Base
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'heading_typography',
+				'name' => 'desc_typography',
 				'label' => __( 'Heding Typography', 'devsiam' ),
 				'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .desc',
 			]
 		);
-		
+		//add
 		$this->add_control(
             'description_color',
             [
