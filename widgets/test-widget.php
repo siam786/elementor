@@ -15,7 +15,7 @@ class Test_Widget extends \Elementor\Widget_Base
 
     public function get_icon()
     {
-        return 'fa fa-code';
+        return 'fa fa-star';
     }
 
     public function get_categories()
@@ -110,6 +110,88 @@ class Test_Widget extends \Elementor\Widget_Base
         );
 
         $this->end_controls_section();
+		//style control tab
+		$this->start_controls_section(
+            'style_section',
+            [
+                'label' => __('style', 'devsiam'),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+		//add heading style
+
+		$this->add_control(
+			'heading_style',
+			[
+				'label' => __( 'Heading Style', 'devsiame' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+		//add controls
+		$this->add_control(
+            'heading_color',
+            [
+                'label' => __('Enter your heading color ', 'devsiam'),
+				'label_block'=>true,
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'scheme' => [
+					'type' => \Elementor\Scheme_Color::get_type(),
+					'value' => \Elementor\Scheme_Color::COLOR_1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .heading' => 'color: {{VALUE}}',
+				],
+            ]
+        );
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'heading_typography',
+				'label' => __( 'Heding Typography', 'devsiam' ),
+				'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .heading',
+			]
+		);
+
+		$this->add_control(
+			'desc_style',
+			[
+				'label' => __( 'Description Style', 'devsiame' ),
+				'type' => \Elementor\Controls_Manager::HEADING,
+				'separator' => 'after',
+			]
+		);
+
+		//add controls
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'heading_typography',
+				'label' => __( 'Heding Typography', 'devsiam' ),
+				'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
+				'selector' => '{{WRAPPER}} .desc',
+			]
+		);
+		
+		$this->add_control(
+            'description_color',
+            [
+                'label' => __('Enter your description color ', 'devsiam'),
+				'label_block'=>true,
+                'type' => \Elementor\Controls_Manager::COLOR,
+                'scheme' => [
+					'type' => \Elementor\Scheme_Color::get_type(),
+					'value' => \Elementor\Scheme_Color::COLOR_1,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .desc' => 'color: {{VALUE}}',
+				],
+            ]
+        );
 		$this->end_controls_section();
 
     }
@@ -122,8 +204,8 @@ class Test_Widget extends \Elementor\Widget_Base
 			$link_text = $settings['link_text'];
 			$pra = $settings['pra'];
 			?>
-<h1><?php echo $title; ?></h1>
-<p><?php echo $description; ?></p>
+<h1 class="heading"><?php echo $title; ?></h1>
+<p class="desc"><?php echo $description; ?></p>
 <a href="<?php echo $link_url;?>"><?php echo $link_text; ?></a>
 <p><?php echo $pra;?></p>
 <?php
