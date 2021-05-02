@@ -5,23 +5,25 @@ class Test_Widget extends \Elementor\Widget_Base
 
     public function get_name()
     {
-        return 'test';
+        return 'W3 Text';
     }
 
     public function get_title()
     {
-        return __('test', 'devsiam');
+        return __('W3 Text', 'devsiam');
     }
 
     public function get_icon()
     {
-        return 'fa fa-star';
+        return 'fa fa-pencil';
     }
 
     public function get_categories()
     {
-        return ['general'];
+        return ['basic'];
     }
+
+    
 
     protected function _register_controls()
     {
@@ -29,8 +31,36 @@ class Test_Widget extends \Elementor\Widget_Base
         $this->start_controls_section(
             'title_section',
             [
-                'label' => __('Title Area', 'devsiam'),
+                'label' => __('Heading Area', 'devsiam'),
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+
+       
+        $this->add_control(
+            'pragraph_alignment',
+            [
+                'label' => __( 'Pragraph Alignment', 'devsiame' ),
+                'type' => \Elementor\Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                        'title' => __( 'Left', 'devsiame' ),
+                        'icon' => 'fa fa-align-left',
+                    ],
+                    'center' => [
+                        'title' => __( 'Center', 'devsiame' ),
+                        'icon' => 'fa fa-align-center',
+                    ],
+                    'right' => [
+                        'title' => __( 'Right', 'devsiame' ),
+                        'icon' => 'fa fa-align-right',
+                    ],
+                ],
+                'default' => 'center',
+                'toggle' => true,
+                'selectors' => [
+					'{{WRAPPER}} .heading' => 'text-align: {{VALUE}}',
+				],
             ]
         );
 
@@ -71,12 +101,13 @@ class Test_Widget extends \Elementor\Widget_Base
                 'placeholder' => __('Enter your TEXT', 'devsiame'),
             ]
         );
-			$this->add_control(
-				'hr',
-				[
-					'type'=>\Elementor\Controls_Manager::DIVIDER
-				]
-				);
+			// $this->add_control(
+			// 	'hr',
+			// 	[
+			// 		'type'=>\Elementor\Controls_Manager::DIVIDER
+			// 	]
+			// 	);
+            
 				$this->end_controls_section();
 			
 				$this->start_controls_section(
@@ -86,7 +117,8 @@ class Test_Widget extends \Elementor\Widget_Base
 						'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 					]
 				);
-		//link control
+                
+		// start link control
         $this->add_control(
             'link_url',
             [
@@ -110,24 +142,29 @@ class Test_Widget extends \Elementor\Widget_Base
         );
 
         $this->end_controls_section();
+
+        $this->start_controls_section(
+            'link2_section',
+            [
+                'label' => __('Enter your Link2 section', 'devsiam'),
+                'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+            ]
+        );
+        
+// start link control
+
+
+$this->end_controls_section();
+        //end content section
 		//style control tab
 		$this->start_controls_section(
             'style_section',
             [
-                'label' => __('style', 'devsiam'),
+                'label' => __('Heading style', 'devsiam'),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
 		//add heading style
-
-		$this->add_control(
-			'heading_style',
-			[
-				'label' => __( 'Heading Style', 'devsiame' ),
-				'type' => \Elementor\Controls_Manager::HEADING,
-				'separator' => 'after',
-			]
-		);
 
 		//add controls
 		$this->add_control(
@@ -155,6 +192,15 @@ class Test_Widget extends \Elementor\Widget_Base
 				'selector' => '{{WRAPPER}} .heading',
 			]
 		);
+        $this->end_controls_section();
+        
+        $this->start_controls_section(
+            'des_section',
+            [
+                'label' => __('Description style', 'devsiam'),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
 
 		$this->add_control(
 			'desc_style',
@@ -171,7 +217,7 @@ class Test_Widget extends \Elementor\Widget_Base
 			\Elementor\Group_Control_Typography::get_type(),
 			[
 				'name' => 'desc_typography',
-				'label' => __( 'Heding Typography', 'devsiam' ),
+				'label' => __( 'Description Typography', 'devsiam' ),
 				'scheme' => \Elementor\Scheme_Typography::TYPOGRAPHY_1,
 				'selector' => '{{WRAPPER}} .desc',
 			]
@@ -193,22 +239,27 @@ class Test_Widget extends \Elementor\Widget_Base
             ]
         );
 		$this->end_controls_section();
+        
 
     }
 
 		protected function render(){
 			$settings = $this->get_settings_for_display();
 			$title = $settings['title'];
+            //echo '<div class="text-align:'.$settings['text_alignment'].' "></div>';
 			$description = $settings['description'];
 			$link_url = $settings['link_url']['url'];
 			$link_text = $settings['link_text'];
 			$pra = $settings['pra'];
 			?>
 <h1 class="heading"><?php echo $title; ?></h1>
+
 <p class="desc"><?php echo $description; ?></p>
 <a href="<?php echo $link_url;?>"><?php echo $link_text; ?></a>
 <p><?php echo $pra;?></p>
 <?php
 	}
+
+
 
 }
