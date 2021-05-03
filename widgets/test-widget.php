@@ -20,7 +20,7 @@ class Test_Widget extends \Elementor\Widget_Base
 
     public function get_categories()
     {
-        return ['general'];
+        return ['w3category'];
     }
 
     protected function _register_controls()
@@ -33,6 +33,32 @@ class Test_Widget extends \Elementor\Widget_Base
                 'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
             ]
         );
+
+        $this->add_control(
+			'alignment',
+			[
+				'label' => __( 'Heding Alignment', 'devsiam' ),
+				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => __( 'Left', 'devsiam' ),
+						'icon' => 'fa fa-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'devsiam' ),
+						'icon' => 'fa fa-align-center',
+					],
+					'right' => [
+						'title' => __( 'Right', 'devsiam' ),
+						'icon' => 'fa fa-align-right',
+					],
+				],
+				'default' => 'center',
+                'selectors' =>[
+                    '{{WRAPPER}} .heading' => 'text-align:{{VALUE}}',
+                ],
+			]
+		);
 
         $this->add_control(
             'title',

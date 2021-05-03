@@ -157,7 +157,17 @@ final class Elementor_devsiam_Extension {
 
         // Category Init
 		add_action( 'elementor/init', [ $this, 'elementor_common_category' ] );
+		add_action("elementor/elements/categories_registered",[$this,'register_new_categories']);
 
+	}
+
+	public function register_new_categories($manager){
+		$manager->add_category(
+			'w3category',[
+			'title'=>_('w3','devsiam'),
+			'icon'=>'fa fa-code'
+		]);
+		
 	}
 
 	/**
